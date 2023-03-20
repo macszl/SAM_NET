@@ -7,17 +7,21 @@ app.get('/', (req, res) => {
     let audioFile = req.query.audioFile;
     let videoFile = req.query.videoFile;
     let imgFile = req.query.imgFile;
+
+    let audioPlayerId = "audioPlayer";
+    let videoPlayerId = "videoPlayer";
+
     if(audioFile !== undefined)
     {
       
       sentText += (`<audio id="audioPlayer" src="` + audioFile + `"> </audio>`);
-      sentText += (`<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`);
+      sentText += (`<button id="audioCancel" onclick=changeOnSrc(` + audioPlayerId + `> Cancel audio </button>`);
     }
 
     if(videoFile !== undefined)
     {
       sentText += (`<video id="videoPlayer" src="` + videoFile + `"> </video>`);
-      sentText += (`<button id="videoCancel" onclick="changeOnSrc("videoPlayer", "cancel.mp4") "> Cancel video </button>`);
+      sentText += (`<button id="videoCancel" onclick=changeOnSrc(` + videoPlayerId + `)> Cancel video </button>`);
     }
 
     if(imgFile)
@@ -26,13 +30,17 @@ app.get('/', (req, res) => {
     }
 
     sentText += (`<script>
-      function changeOnSrc(id, onClickValue)
+      function changeOnSrc(id)
       {
-        element = Document.getElementById(id);
-        element.src = onClickValue; 
+        if(id === "audioPlayer"){
+          Document.getElementById(id).src = cancel.mp3; 
+        }
+        else { 
+          Document.getElementById(id).src = cancel.mp4;
+        }
       }
     </script>`)
     res.send(sentText);
 })
 
-app.listen(4080)
+app.listen(4081)
