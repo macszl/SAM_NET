@@ -8,21 +8,21 @@ app.get('/', (req, res) => {
     
     if(req.query.audioPlayer)
     {
-      sentText += `<audio id="audioPlayer" src=` + res.query.audioPlayer + `> </audio>`
+      sentText += `<audio id="audioPlayer" src="` + res.query.audioPlayer + `"> </audio>`
+      sentText += `<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`;
     }
 
     if(req.query.videoPlayer)
     {
-      sentText += `<video id="videoPlayer" src=` + res.query.videoPlayer + `> </video>`
+      sentText += `<video id="videoPlayer" src="` + res.query.videoPlayer + `"> </video>`
+      sentText += `<button id="videoCancel" onclick="changeOnSrc("videoPlayer", "cancel.mp4")"> Cancel video </button>`;
     }
 
     if(req.query.imgFile)
     {
-      sentText += `<img id="posterImage" src=` + res.query.imgFile+  `></img>`
+      sentText += `<img id="posterImage" src="` + res.query.imgFile+  `"></img>`
     }
 
-    let videoCancelButton = `<button id="videoCancel" onclick=changeOnSrc("videoPlayer", "cancel.mp4") > Cancel video </button>`;
-    let audioCancelButton = `<button id="audioCancel" onclick=changeOnSrc("audioPlayer", "cancel.mp3") > Cancel audio </button>`;
     let scriptTag = `<script>
       function changeOnSrc(id, onClickValue)
       {
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
         element.src = onClickValue; 
       }
     </script>`
-    res.send(sentText + videoCancelButton + audioCancelButton + scriptTag);
+    res.send(sentText + scriptTag);
 })
 
 app.listen(4080)
