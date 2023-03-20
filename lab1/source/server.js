@@ -3,17 +3,20 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-    let sentText = "";
-    
-    if(req.query.audioPlayer)
+    llet sentText = "";
+    let audioFile = req.query.audioFile;
+    let videoFile = req.query.videoFile;
+    let imgFile = req.query.imgFile;
+    if(audioFile !== undefined)
     {
-      sentText += `<audio id=audioPlayer src=` + res.query.audioPlayer + `> </audio>`
+      sentText += (`<audio id="audioPlayer" src="` + audioFile + `"> </audio>`);
     }
 
-    if(req.query.videoPlayer)
+    if(videoFile !== undefined)
     {
-      sentText += `<video id=videoPlayer src=` + res.query.videoPlayer + `> </video>`
+      sentText += (`<video id="videoPlayer" src="` + videoFile + `"> </video>`);
     }
+
     res.send(sentText);
 })
 

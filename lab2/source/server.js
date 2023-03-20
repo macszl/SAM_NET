@@ -1,36 +1,38 @@
 const express = require('express')
-
-const app = express()
+var app = express()
 
 
 app.get('/', (req, res) => {
     let sentText = "";
-    
-    if(req.query.audioPlayer)
+    let audioFile = req.query.audioFile;
+    let videoFile = req.query.videoFile;
+    let imgFile = req.query.imgFile;
+    if(audioFile !== undefined)
     {
-      sentText += `<audio id="audioPlayer" src="` + res.query.audioPlayer + `"> </audio>`
-      sentText += `<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`;
+      
+      sentText += (`<audio id="audioPlayer" src="` + audioFile + `"> </audio>`);
+      sentText += (`<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`);
     }
 
-    if(req.query.videoPlayer)
+    if(videoFile !== undefined)
     {
-      sentText += `<video id="videoPlayer" src="` + res.query.videoPlayer + `"> </video>`
-      sentText += `<button id="videoCancel" onclick="changeOnSrc("videoPlayer", "cancel.mp4")"> Cancel video </button>`;
+      sentText += (`<video id="videoPlayer" src="` + videoFile + `"> </video>`);
+      sentText += (`<button id="videoCancel" onclick="changeOnSrc("videoPlayer", "cancel.mp4") "> Cancel video </button>`);
     }
 
-    if(req.query.imgFile)
+    if(imgFile)
     {
-      sentText += `<img id="posterImage" src="` + res.query.imgFile+  `"></img>`
+      sentText += (`<img id="posterImage" src="` + imgFile +  `"></img>`);
     }
 
-    let scriptTag = `<script>
+    sentText += (`<script>
       function changeOnSrc(id, onClickValue)
       {
         element = Document.getElementById(id);
         element.src = onClickValue; 
       }
-    </script>`
-    res.send(sentText + scriptTag);
+    </script>`)
+    res.send(sentText);
 })
 
 app.listen(4080)
