@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-    llet sentText = "";
+    let sentText = "";
     let audioFile = req.query.audioFile;
     let videoFile = req.query.videoFile;
     let imgFile = req.query.imgFile;
